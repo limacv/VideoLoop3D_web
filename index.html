@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="VideoLoop3D">
+  <meta name="keywords" content="NeRF, Dynamic, 3D representation, Video Loop, 3D Video">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VideoLoop3D</title>
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">3D Video Loops from Asynchronous Input</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://limacv.github.io/homepage/">Ma Li</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://xiaoyu258.github.io/">Li Xiaoyu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://liaojing.github.io/html/">Liao Jing</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cse.ust.hk/~psander/">Pedro V. Sander</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The Hong Kong University of Science and Technology</span>
+            <span class="author-block"><sup>2</sup>Tencent AI Lab</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>3</sup>City University of Hong Kong</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2111.14292"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Arxiv</span>
+                </a>
+              </span> -->
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="none"
+                   class="external-link button is-normal is-rounded"
+                   target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (coming soon)</span>
+                </a>
+              </span>
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="none"
+                   class="external-link button is-normal is-rounded"
+                   target="_blank">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supple (coming soon)</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="none"
+                   class="external-link button is-normal is-rounded"
+                   target="_blank">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://limacv.github.io/VideoLoopUI/"
+                   class="external-link button is-normal is-rounded is-dark"
+                   target="_blank">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Live Demo</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2>
+        <img src="images/teaser.jpg"
+                 class="teaser image"
+                 alt="teaser image"/>
+      </h2>
+      <h2 style="overflow: hidden">
+        <embed src="https://limacv.github.io/VideoLoopUI/" width="100%" height="300">
+      </h2>
+      <h2 class="subtitle has-text-centered">
+        Given a set of asynchronous multi-view videos, we propose a pipeline to construct a novel 3D looping video representation (a),
+        which consists of a <span style='color: #e2181b;'>static texture atlas</span>, a <span style='color: #18BB19;'>dynamic texture atlas</span>, and multiple tiles as the geometry proxy.
+        The 3D video loops allows both view and time control (b), and can be rendered in real time even on mobile devices (c). (HTML5 is required to play the teaser)
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Looping videos are short video clips that can be looped
+            endlessly without visible seams or artifacts. They provide
+            a very attractive way to capture the dynamism of natural
+            scenes. Existing methods have been mostly limited to 2D
+            representations. In this paper, we take a step forward and
+            propose a practical solution that enables an immersive experience on dynamic 3D looping scenes. The key challenge
+            is to consider the per-view looping conditions from asynchronous input while maintaining view consistency for the
+            3D representation. We propose a novel sparse 3D video representation, namely Multi-Tile Video (MTV), which not only
+            provides a view-consistent prior, but also greatly reduces
+            memory usage, making the optimization of a 4D volume
+            tractable. Then, we introduce a two-stage pipeline to construct the 3D looping MTV from <b>completely asynchronous</b>
+            multi-view videos with no time overlap. A novel looping loss
+            based on video temporal retargeting algorithms is adopted
+            during the optimization to loop the 3D scene. Experiments
+            of our framework have shown promise in successfully generating and rendering photorealistic 3D looping videos in
+            real time even on mobile devices. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    
+    <!-- Pipeline. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">3D Video Representation</h2>
+        <div class="pipeline">
+            <img src="images/representation.jpg"
+            class="center" width="60%" height="60%"
+            alt="repr image"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            Instead of storing a sequence of RGBA maps for each plane as in Multi-plane Video (MPV) representation, 
+            Multi-tile Videos (MTVs) reduce the memory requirements by exploiting the spatio-temporal sparsity of the scene.
+            we subdivide each plane into a regular grid of tiny tiles. Each tile stores a small RGBA patch sequence. 
+            We also assign a label <em>l</em> for each tile based on whether it contains looping content <em>l<sub>loop</sub></em>,
+            a static scene <em>l<sub>static</sub></em>, or is simply empty <em>l<sub>empty</sub></em>. 
+            We could then store a single static RGBA patch for <em>l<sub>static</sub></em>, and discard tiles that are empty.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Pipeline. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Two-stage Pipeline</h2>
+        <div class="pipeline">
+          <img src="images/pipeline.jpg"
+                 class="pipeline image"
+                 alt="pipeline image"/>
+          <!-- <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            We propose a two-stage pipeline to generate the MTV representation from asynchronous mult-view videos.
+            In the first stage, we initialize the MTV by optimizing a static Multiplane Image (MPI) 
+            and a 3D loopable mask using long-exposure images and 2D loopable masks derived from the input videos. 
+            We then construct an MTV through a tile culling process. 
+            In the second stage, we train the MTV using an analysis-by-synthesis approach in a coarse-to-fine manner.
+            The key enabler for this process is a novel looping loss based on video retargeting algorithms, 
+            which encourages a video to simultaneously loop and preserve similarity to the input. 
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Pipeline. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">More results</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            Please click each image to open the demo in a new tab.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-fall5">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/fall5" target=”_blank”>
+          <img src="images/fall5.jpg" alt="fall5 image"/></a>
+        </div>
+        <div class="item item-fall4">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/fall4" target=”_blank”>
+          <img src="images/fall4.jpg" alt="fall4 image"/></a>
+        </div>
+        <div class="item item-ustfall1">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/ustfall1" target=”_blank”>
+          <img src="images/ustfall1.jpg" alt="ustfall1 image"/></a>
+        </div>
+        <div class="item item-fall3">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/fall3" target=”_blank”>
+          <img src="images/fall3.jpg" alt="fall3 image"/></a>
+        </div>
+        <div class="item item-fall1">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/fall1" target=”_blank”>
+          <img src="images/fall1.jpg" alt="fall1 image"/></a>
+        </div>
+        <div class="item item-fall2">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/fall2" target=”_blank”>
+          <img src="images/fall2.jpg" alt="fall2 image"/></a>
+        </div>
+        <div class="item item-ustfall2">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/ustfall2" target=”_blank”>
+          <img src="images/ustfall2.jpg" alt="ustfall2 image"/></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-grass">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/grass" target=”_blank”>
+          <img src="images/grass.jpg" alt="grass image"/></a>
+        </div>
+        <div class="item item-pillar">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/pillar" target=”_blank”>
+          <img src="images/pillar.jpg" alt="pillar image"/></a>
+        </div>
+        <div class="item item-rock">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/rock" target=”_blank”>
+          <img src="images/rock.jpg" alt="rock image"/></a>
+        </div>
+        <div class="item item-usttap">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/usttap" target=”_blank”>
+          <img src="images/tap.jpg" alt="usttap image"/></a>
+        </div>
+        <div class="item item-yuan">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/yuan" target=”_blank”>
+          <img src="images/yuan.jpg" alt="yuan image"/></a>
+        </div>
+        <div class="item item-palm">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/palm" target=”_blank”>
+          <img src="images/palm.jpg" alt="palm image"/></a>
+        </div>
+        <div class="item item-grasstree">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/grasstree" target=”_blank”>
+          <img src="images/grasstree.jpg" alt="grasstree image"/></a>
+        </div>
+        <div class="item item-ustfall3">
+          <a href="https://limacv.github.io/VideoLoopUI/?dataurl=assets/ustfall3" target=”_blank”>
+          <img src="images/ustfall3.jpg" alt="ustfall3 image"/></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Limitations</h2>
+      </div>
+    </div>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <li>
+            The synthetic results still contain some artifacts.
+          </li>
+          <li>
+            It cannot model complex view-dependent effects, such as non-planar specular. 
+          </li>
+          <li>
+            We assume the scene to possess a looping pattern, which works best for natural scenes like 
+            flowing water and waving trees. However, our method tends to fail if the scene is not loopable,  
+            because each view has completely unique content.
+          </li>
+          <li>
+            The MTV representation used is actually a 2.5D representation that only supports synthetic novel views
+            with a narrow baseline. 
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{videoloop,
+      title   ={3D Video Loops from Asynchronous Input},
+      author  ={Ma, Li and Li, Xiaoyu and Liao, Jing and Pedro V. Sander},
+      journal ={???},
+      year    ={???}
+}
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://homes.cs.washington.edu/~kpar/nerfies/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            The source code of this website is borrowed from 
+            <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/limacv/deblurnerf">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
